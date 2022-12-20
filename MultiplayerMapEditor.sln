@@ -38,6 +38,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiplayerMapEditor.Unturn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiplayerMapEditor.Networking.Unturned", "src\MultiplayerMapEditor.Networking.Unturned\MultiplayerMapEditor.Networking.Unturned.csproj", "{97B5F56B-481C-4B3E-AE35-4FB6B1D9617A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6A4893F5-2B26-4977-B771-94FC67D2938E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiplayerMapEditor.Editor.Level.Objects.UnitTests", "tests\MultiplayerMapEditor.Editor.Level.Objects.UnitTests\MultiplayerMapEditor.Editor.Level.Objects.UnitTests.csproj", "{90EE1381-348C-48FE-9F81-7E5625123B18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,7 @@ Global
 		{D4489C27-E589-46F2-BF2B-BDB97377B495} = {F04D822D-5A9E-471D-BFA2-4587F7A0824F}
 		{94F8348E-A11D-4FB9-A655-D8844575B436} = {F04D822D-5A9E-471D-BFA2-4587F7A0824F}
 		{97B5F56B-481C-4B3E-AE35-4FB6B1D9617A} = {F04D822D-5A9E-471D-BFA2-4587F7A0824F}
+		{90EE1381-348C-48FE-9F81-7E5625123B18} = {6A4893F5-2B26-4977-B771-94FC67D2938E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2C76312A-4161-4F64-888B-BEFACD839ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -131,5 +136,9 @@ Global
 		{97B5F56B-481C-4B3E-AE35-4FB6B1D9617A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97B5F56B-481C-4B3E-AE35-4FB6B1D9617A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97B5F56B-481C-4B3E-AE35-4FB6B1D9617A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EE1381-348C-48FE-9F81-7E5625123B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EE1381-348C-48FE-9F81-7E5625123B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EE1381-348C-48FE-9F81-7E5625123B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EE1381-348C-48FE-9F81-7E5625123B18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
