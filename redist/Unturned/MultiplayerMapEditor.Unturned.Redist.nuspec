@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MultiplayerMapEditor.Unturned.Redist</id>
+    <version>3.22.20.0</version>
+    <description>Unturned redistributables.</description>
+    <authors>Smartly Dressed Games</authors>
+    <license type="file">LICENSE.txt</license>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="MultiplayerMapEditor.UnityEngine.Redist" version="2020.3.38" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="*.dll" target="lib\net461" />
+    <file src="*.pdb" target="lib\net461" />
+    <file src="LICENSE.txt" target="" />
+  </files>
+</package>

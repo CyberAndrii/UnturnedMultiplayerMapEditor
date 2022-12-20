@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageVersion>3.22.20</PackageVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NuspecFile>MultiplayerMapEditor.Unturned.Redist.nuspec</NuspecFile>
+  </PropertyGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="./../.nuget" />
+  </Target>
+
+</Project>

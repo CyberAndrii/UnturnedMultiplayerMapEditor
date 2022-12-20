@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="MultiplayerMapEditor.LiteNetLib.Redist" Version="0.9.5.2" />
+    <PackageReference Include="MultiplayerMapEditor.UniTask.Redist" Version="2.3.3" />
+  </ItemGroup>
+
+</Project>

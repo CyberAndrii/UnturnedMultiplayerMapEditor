@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="HarmonyX" Version="2.10.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.Abstractions\MultiplayerMapEditor.Abstractions.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.Common\MultiplayerMapEditor.Common.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.IoC.Abstractions\MultiplayerMapEditor.IoC.Abstractions.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.Networking\MultiplayerMapEditor.Networking.csproj" />
+  </ItemGroup>
+
+</Project>

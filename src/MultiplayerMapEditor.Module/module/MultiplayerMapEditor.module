@@ -1,0 +1,11 @@
+{
+	"Name": "MultiplayerMapEditor",
+	"Version": "0.0.0.0",
+	"Assemblies":
+	[
+		{
+			"Path": "/lib/MultiplayerMapEditor.Module.dll",
+			"Role": "Both_Required"
+		}
+	]
+}

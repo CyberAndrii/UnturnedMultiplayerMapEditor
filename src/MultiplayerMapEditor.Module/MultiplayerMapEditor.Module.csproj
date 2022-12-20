@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Target Name="CopyRuntimeLibraries" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <DependencyFiles Include="$(MSBuildThisFileDirectory)runtimelibs\*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(OutDir)" Condition="@(DependencyFiles-&gt;Count()) != 0" />
+  </Target>
+
+  <Target Name="CopyModuleFiles" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <ModuleFiles Include="$(MSBuildThisFileDirectory)module\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ModuleFiles)" DestinationFolder="$(OutDir)" Condition="@(ModuleFiles-&gt;Count()) != 0" />
+  </Target>
+
+  <Target Name="MoveAssembliesToSubdirectory" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <FilesToMove Include="$(OutDir)*.dll;$(OutDir)*.pdb" />
+    </ItemGroup>
+    <Delete Files="$(OutDir)lib" />
+    <Move SourceFiles="@(FilesToMove)" DestinationFolder="$(OutDir)lib" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.HostBuilder\MultiplayerMapEditor.HostBuilder.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MultiplayerMapEditor.Unturned.Redist" Version="3.22.20" />
+  </ItemGroup>
+
+</Project>

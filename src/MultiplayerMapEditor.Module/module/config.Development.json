@@ -1,0 +1,10 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "MultiplayerMapEditor": "Verbose"
+      }
+    }
+  }
+}

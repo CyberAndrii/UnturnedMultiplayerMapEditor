@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.Networking.Abstractions\MultiplayerMapEditor.Networking.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MultiplayerMapEditor.UniTask.Redist" Version="2.3.3" />
+  </ItemGroup>
+
+</Project>

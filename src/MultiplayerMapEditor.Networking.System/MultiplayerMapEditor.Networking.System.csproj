@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.IoC.Abstractions\MultiplayerMapEditor.IoC.Abstractions.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.Networking.Abstractions\MultiplayerMapEditor.Networking.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

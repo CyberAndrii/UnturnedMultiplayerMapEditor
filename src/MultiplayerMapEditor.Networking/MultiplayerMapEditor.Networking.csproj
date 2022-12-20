@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
+    <PackageReference Include="MultiplayerMapEditor.UniTask.Redist" Version="2.3.3" />
+    <PackageReference Include="MultiplayerMapEditor.Unturned.Redist" Version="3.22.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.Common\MultiplayerMapEditor.Common.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.IoC.Abstractions\MultiplayerMapEditor.IoC.Abstractions.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.Networking.Abstractions\MultiplayerMapEditor.Networking.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
