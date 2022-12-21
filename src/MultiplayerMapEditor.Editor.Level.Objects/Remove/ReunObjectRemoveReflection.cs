@@ -54,8 +54,8 @@ internal static class ReunObjectRemoveReflection
         return (ItemAsset?)ItemAssetField.GetValue(reun);
     }
 
-    public static Transform? GetModel(this ReunObjectRemove reun)
+    public static UnityEngine.Transform? GetModel(this ReunObjectRemove reun)
     {
-        return (Transform?)ModelField.GetValue(reun);
+        return (UnityEngine.Transform?)ModelField.GetValue(reun);
     }
 }

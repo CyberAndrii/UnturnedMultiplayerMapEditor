@@ -5,7 +5,7 @@ internal sealed class ClientsideNetObjectCreator : IClientsideNetObjectCreator
     private readonly IClientsideNetManager _netManager;
     private readonly INetPacketProcessor _netPacketProcessor;
     private readonly ILevelObjectsManager _levelObjectsManager;
-    private readonly Dictionary<Guid, Action<Transform, NetId>> _createdCallbacks = new();
+    private readonly Dictionary<Guid, Action<UnityEngine.Transform, NetId>> _createdCallbacks = new();
 
     public ClientsideNetObjectCreator(
         IClientsideNetManager netManager,
@@ -23,7 +23,7 @@ internal sealed class ClientsideNetObjectCreator : IClientsideNetObjectCreator
         Vector3 scale,
         ObjectAsset? objectAsset,
         ItemAsset? itemAsset,
-        Action<Transform, NetId>? createdCallback)
+        Action<UnityEngine.Transform, NetId>? createdCallback)
     {
         var correlationId = Guid.NewGuid();
 
@@ -56,7 +56,7 @@ internal sealed class ClientsideNetObjectCreator : IClientsideNetObjectCreator
     }
 
 
-    public void NotifyCreated(Guid correlationId, Transform transform, NetId netId)
+    public void NotifyCreated(Guid correlationId, UnityEngine.Transform transform, NetId netId)
     {
         if (!_createdCallbacks.TryGetValue(correlationId, out var callback))
         {

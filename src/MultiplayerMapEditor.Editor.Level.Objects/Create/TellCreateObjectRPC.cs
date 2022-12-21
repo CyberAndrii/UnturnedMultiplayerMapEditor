@@ -96,7 +96,7 @@ internal sealed class TellCreateObjectRPC : IHostedService
         NotifyCreated(packet.CorrelationId, buildableObject?.BuildableObject?.transform, packet.NetId);
     }
 
-    private void NotifyCreated(Guid? correlationId, Transform? transform, NetId netId)
+    private void NotifyCreated(Guid? correlationId, UnityEngine.Transform? transform, NetId netId)
     {
         if (correlationId == null || transform == null)
         {

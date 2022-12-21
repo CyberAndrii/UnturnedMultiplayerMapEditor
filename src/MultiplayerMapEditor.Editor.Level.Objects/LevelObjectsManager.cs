@@ -94,6 +94,38 @@ internal sealed class LevelObjectsManager : ILevelObjectsManager
         return new LevelBuildableObjectWrapper(buildableObject, netId);
     }
 
+    public void TransformObject(NetId netId,
+        Vector3 fromPosition,
+        Quaternion fromRotation,
+        Vector3 fromScale,
+        Vector3 toPosition,
+        Quaternion toRotation,
+        Vector3 toScale)
+    {
+        var transform = NetIdRegistry.GetTransform(netId, null);
+
+        if (transform == null)
+        {
+            throw new ArgumentException("Transform was not found", nameof(netId))
+            {
+                Data = { ["NetId"] = netId.ToString() }
+            };
+        }
+
+        LevelObjects.transformObject(
+            transform,
+            toPosition,
+            toRotation,
+            toScale,
+            fromPosition,
+            fromRotation,
+            fromScale
+        );
+
+        // This is needed to sync pivot on other players when multiple players selected the same object.
+        EditorObjectsReflection.CalculateHandleOffsets();
+    }
+
     public void Remove(NetId netId)
     {
         if (TryFind(netId, out LevelObject? @object))
@@ -159,16 +191,15 @@ internal sealed class LevelObjectsManager : ILevelObjectsManager
         _logger.LogBuildableObjectRemoved(buildableObject.asset.name, netId);
     }
 
-    private void Deselect(Transform transform)
+    private void Deselect(UnityEngine.Transform transform)
     {
-        // Delay to prevent changing collection if iteration of selected objects is not yet finished.
+        // Delay to prevent changing collection if iteration of selections is not yet finished (by Unturned code).
         // Fixes a bug when some of selected objects will not get deleted.
-        //UniTask.Post(() => EditorObjects.removeSelection(transform), PlayerLoopTiming.LastUpdate);
-
+        // Using custom method because the original throws NullReferenceException.
         UniTask.Post(() => EditorObjectsReflection.RemoveSelection(transform), PlayerLoopTiming.LastUpdate);
     }
 
-    public bool TryFind(Transform transform, [NotNullWhen(true)] out NetId? netId)
+    public bool TryFind(UnityEngine.Transform transform, [NotNullWhen(true)] out NetId? netId)
     {
         if (transform == null)
         {
@@ -193,11 +224,11 @@ internal sealed class LevelObjectsManager : ILevelObjectsManager
         }
 
         @object = null;
-        var transform = NetIdRegistry.Get<Transform?>(netId);
+        var transform = NetIdRegistry.Get<UnityEngine.Transform?>(netId);
         return transform != null && TryFind(transform, out @object);
     }
 
-    public bool TryFind(Transform transform, [NotNullWhen(true)] out LevelObject? @object)
+    public bool TryFind(UnityEngine.Transform transform, [NotNullWhen(true)] out LevelObject? @object)
     {
         if (transform == null)
         {
@@ -223,11 +254,11 @@ internal sealed class LevelObjectsManager : ILevelObjectsManager
         }
 
         buildableObject = null;
-        var transform = NetIdRegistry.Get<Transform?>(netId);
+        var transform = NetIdRegistry.Get<UnityEngine.Transform?>(netId);
         return transform != null && TryFind(transform, out buildableObject);
     }
 
-    public bool TryFind(Transform transform, [NotNullWhen(true)] out LevelBuildableObject? buildableObject)
+    public bool TryFind(UnityEngine.Transform transform, [NotNullWhen(true)] out LevelBuildableObject? buildableObject)
     {
         if (transform == null)
         {

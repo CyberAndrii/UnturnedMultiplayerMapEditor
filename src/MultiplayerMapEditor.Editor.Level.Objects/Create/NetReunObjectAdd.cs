@@ -5,7 +5,7 @@ namespace MultiplayerMapEditor.Editor.Level.Objects.Create;
 /// <summary>
 /// Alternative of the <see cref="SDG.Unturned.ReunObjectAdd"/> class with networking support.
 /// </summary>
-internal sealed class NetReunObjectAdd : IReun
+internal sealed class NetReunObjectAdd : INetReun
 {
     private readonly Vector3 _position;
     private readonly Quaternion _rotation;
@@ -14,8 +14,6 @@ internal sealed class NetReunObjectAdd : IReun
     private readonly ItemAsset? _itemAsset;
     private readonly INetObjectCreator _netObjectCreator;
     private readonly INetObjectRemover _netObjectRemover;
-
-    internal NetId NetId;
 
     private readonly ReunStateLock _state = new(
         currentState: ReunState.Undo,
@@ -48,9 +46,11 @@ internal sealed class NetReunObjectAdd : IReun
         this.step = step;
     }
 
+    public NetId NetId { get; set; }
+
     public int step { get; }
 
-    public Transform? redo()
+    public UnityEngine.Transform? redo()
     {
         if (!_state.TryEnter(ReunState.Waiting))
         {
@@ -85,27 +85,14 @@ internal sealed class NetReunObjectAdd : IReun
         return null;
     }
 
-    private void OnCreated(Transform transform, NetId netId)
+    private void OnCreated(UnityEngine.Transform transform, NetId netId)
     {
         if (!_state.TryEnter(ReunState.Redo))
         {
             return;
         }
 
-        NetId = netId;
-
-        var reuns = LevelObjectsReflection.GetReuns();
-        var indexOfThis = Array.IndexOf(reuns, this);
-
-        if (indexOfThis < 1)
-        {
-            return;
-        }
-
-        if (reuns[indexOfThis - 1] is NetReunObjectRemove reunRemove)
-        {
-            reunRemove.NetId = netId;
-        }
+        LevelObjectsReunLinker.ReplaceNetId(oldNetId: NetId, newNetId: netId);
     }
 
     public void undo()

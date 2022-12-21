@@ -22,7 +22,7 @@ internal sealed class ServersideNetObjectCreator : IServersideNetObjectCreator
         Vector3 scale,
         ObjectAsset? objectAsset,
         ItemAsset? itemAsset,
-        Action<Transform, NetId>? createdCallback,
+        Action<UnityEngine.Transform, NetId>? createdCallback,
         NetPeer? requestedBy,
         Guid? correlationId)
     {

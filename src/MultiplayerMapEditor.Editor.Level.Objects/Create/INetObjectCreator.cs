@@ -12,10 +12,10 @@ internal interface IClientsideNetObjectCreator : INetObjectCreator
         Vector3 scale,
         ObjectAsset? objectAsset,
         ItemAsset? itemAsset,
-        Action<Transform, NetId>? createdCallback
+        Action<UnityEngine.Transform, NetId>? createdCallback
     );
 
-    void NotifyCreated(Guid correlationId, Transform transform, NetId netId);
+    void NotifyCreated(Guid correlationId, UnityEngine.Transform transform, NetId netId);
 }
 
 internal interface IServersideNetObjectCreator : INetObjectCreator
@@ -26,7 +26,7 @@ internal interface IServersideNetObjectCreator : INetObjectCreator
         Vector3 scale,
         ObjectAsset? objectAsset,
         ItemAsset? itemAsset,
-        Action<Transform, NetId>? createdCallback,
+        Action<UnityEngine.Transform, NetId>? createdCallback,
         NetPeer? requestedBy,
         Guid? correlationId
     );

@@ -2,6 +2,7 @@ using HarmonyLib;
 using Microsoft.Extensions.Hosting;
 using MultiplayerMapEditor.Editor.Level.Objects.Create;
 using MultiplayerMapEditor.Editor.Level.Objects.Remove;
+using MultiplayerMapEditor.Editor.Level.Objects.Transform;
 
 namespace MultiplayerMapEditor.Editor.Level.Objects;
 
@@ -9,6 +10,7 @@ internal sealed class LevelObjectsReunReplacer : IHostedService
 {
     private readonly INetObjectCreator _netObjectCreator;
     private readonly INetObjectRemover _netObjectRemover;
+    private readonly INetObjectTransformer _netObjectTransformer;
     private readonly ILogger<LevelObjectsReunReplacer> _logger;
     private Harmony? _harmony;
 
@@ -19,10 +21,12 @@ internal sealed class LevelObjectsReunReplacer : IHostedService
     public LevelObjectsReunReplacer(
         INetObjectCreator netObjectCreator,
         INetObjectRemover netObjectRemover,
+        INetObjectTransformer netObjectTransformer,
         ILogger<LevelObjectsReunReplacer> logger)
     {
         _netObjectCreator = netObjectCreator;
         _netObjectRemover = netObjectRemover;
+        _netObjectTransformer = netObjectTransformer;
         _logger = logger;
     }
 
@@ -48,6 +52,7 @@ internal sealed class LevelObjectsReunReplacer : IHostedService
         {
             ReunObjectAdd add => NetReunObjectAdd.From(add, _netObjectCreator, _netObjectRemover),
             ReunObjectRemove remove => NetReunObjectRemove.From(remove, _netObjectCreator, _netObjectRemover),
+            ReunObjectTransform transform => NetReunObjectTransform.From(transform, _netObjectTransformer),
             _ => reun
         };
 
@@ -57,7 +62,10 @@ internal sealed class LevelObjectsReunReplacer : IHostedService
             return;
         }
 
-        _logger.LogReunReplaced(originalReun.GetType().Name, reun.GetType().Name);
+        if (_logger.IsEnabled(LogLevel.Trace))
+        {
+            _logger.LogReunReplaced(originalReun.GetType().Name, reun.GetType().Name);
+        }
     }
 
     [HarmonyPatch(

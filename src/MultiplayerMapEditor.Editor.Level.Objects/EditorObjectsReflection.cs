@@ -23,9 +23,16 @@ internal static class EditorObjectsReflection
     }
 
     // https://github.com/Unturned-Datamining/Unturned-Datamining/blob/d2c09ed739163b4aa6eb2af5d7aa6119d56300d4/Assembly-CSharp/SDG.Unturned/EditorObjects.cs#L162
-    public static void RemoveSelection(Transform? select)
+    public static void RemoveSelection(UnityEngine.Transform? select)
     {
         var selections = GetSelections();
+
+        // Removes all selections with null transform
+        // because the original code throws NullReferenceException.
+        //
+        // We need to remove all of them because the same exception
+        // will be thrown later in the CalculateHandleOffsets().
+        RemoveSelectionsWithNullTransform(selections);
 
         for (var index = 0; index < selections.Count; ++index)
         {
@@ -38,12 +45,6 @@ internal static class EditorObjectsReflection
 
             // In the original code this line was at the bottom but moved higher.
             selections.RemoveAt(index);
-
-            // This check is missing in the original code and causes NullReferenceException.
-            if (selection.transform == null)
-            {
-                break;
-            }
 
             HighlighterTool.unhighlight(select);
             SelectDecals(select, false);
@@ -59,7 +60,18 @@ internal static class EditorObjectsReflection
         CalculateHandleOffsets();
     }
 
-    public static void SelectDecals(Transform select, bool isSelected)
+    private static void RemoveSelectionsWithNullTransform(List<EditorSelection> selections)
+    {
+        for (var i = selections.Count - 1; i >= 0; i--)
+        {
+            if (selections[i].transform == null)
+            {
+                selections.RemoveAt(i);
+            }
+        }
+    }
+
+    public static void SelectDecals(UnityEngine.Transform select, bool isSelected)
     {
         SelectDecalsMethod.Invoke(null, new object[] { select, isSelected });
     }

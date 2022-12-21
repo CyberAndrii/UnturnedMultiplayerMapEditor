@@ -2,6 +2,7 @@ using Autofac;
 using Microsoft.Extensions.Hosting;
 using MultiplayerMapEditor.Editor.Level.Objects.Create;
 using MultiplayerMapEditor.Editor.Level.Objects.Remove;
+using MultiplayerMapEditor.Editor.Level.Objects.Transform;
 using MultiplayerMapEditor.IoC.Abstractions;
 
 namespace MultiplayerMapEditor.Editor.Level.Objects.IoC;
@@ -15,16 +16,20 @@ internal sealed class ConnectionContainerBuilder : IConnectionContainerBuilder
             builder.RegisterType<ClientsideNetObjectCreator>()
                 .As<INetObjectCreator>().As<IClientsideNetObjectCreator>().SingleInstance();
             builder.RegisterType<ClientsideNetObjectRemover>().As<INetObjectRemover>().SingleInstance();
+            builder.RegisterType<ClientsideNetObjectTransformer>().As<INetObjectTransformer>().SingleInstance();
             builder.RegisterType<TellCreateObjectRPC>().As<IHostedService>().SingleInstance();
             builder.RegisterType<TellRemoveObjectRPC>().As<IHostedService>().SingleInstance();
+            builder.RegisterType<TellTransformObjectRPC>().As<IHostedService>().SingleInstance();
         }
         else
         {
             builder.RegisterType<ServersideNetObjectCreator>()
                 .As<INetObjectCreator>().As<IServersideNetObjectCreator>().SingleInstance();
             builder.RegisterType<ServersideNetObjectRemover>().As<INetObjectRemover>().SingleInstance();
+            builder.RegisterType<ServersideNetObjectTransformer>().As<INetObjectTransformer>().SingleInstance();
             builder.RegisterType<AskCreateObjectRPC>().As<IHostedService>().SingleInstance();
             builder.RegisterType<AskRemoveObjectRPC>().As<IHostedService>().SingleInstance();
+            builder.RegisterType<AskTransformObjectRPC>().As<IHostedService>().SingleInstance();
         }
 
         builder.RegisterType<LevelObjectsManager>().As<ILevelObjectsManager>().SingleInstance();
