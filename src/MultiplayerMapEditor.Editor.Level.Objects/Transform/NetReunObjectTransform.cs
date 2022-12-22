@@ -1,5 +1,3 @@
-using MultiplayerMapEditor.Editor.Level.Objects.Remove;
-
 namespace MultiplayerMapEditor.Editor.Level.Objects.Transform;
 
 /// <summary>
@@ -7,12 +5,12 @@ namespace MultiplayerMapEditor.Editor.Level.Objects.Transform;
 /// </summary>
 internal sealed class NetReunObjectTransform : INetReun
 {
-    private Vector3 _fromPosition;
-    private Quaternion _fromRotation;
-    private Vector3 _fromScale;
-    private Vector3 _toPosition;
-    private Quaternion _toRotation;
-    private Vector3 _toScale;
+    private readonly Vector3 _fromPosition;
+    private readonly Quaternion _fromRotation;
+    private readonly Vector3 _fromScale;
+    private readonly Vector3 _toPosition;
+    private readonly Quaternion _toRotation;
+    private readonly Vector3 _toScale;
     private readonly INetObjectTransformer _netObjectTransformer;
 
     private readonly ReunStateLock _state = new(

@@ -37,6 +37,8 @@ internal interface ILevelObjectsManager
 
     void Remove(NetId netId);
 
+    void UpdateObjectProperties(NetId netId, Guid materialOverride, int materialIndexOverride);
+
     bool TryFind(UnityEngine.Transform transform, [NotNullWhen(true)] out NetId? netId);
 
     bool TryFind(NetId netId, [NotNullWhen(true)] out LevelObject? levelObject);

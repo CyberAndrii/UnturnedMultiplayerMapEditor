@@ -34,15 +34,31 @@ internal static class LevelObjectReflection
             null)
         ?? throw new MissingMemberException(nameof(LevelObject), "Constructor");
 
+    public static AssetReference<MaterialPaletteAsset> GetCustomMaterialOverride(this LevelObject levelObject)
+    {
+        return (AssetReference<MaterialPaletteAsset>)CustomMaterialOverrideField.GetValue(levelObject);
+    }
+
     public static Guid GetCustomMaterialOverrideGuid(this LevelObject levelObject)
     {
-        var assetRef = (AssetReference<MaterialPaletteAsset>)CustomMaterialOverrideField.GetValue(levelObject);
-        return assetRef.GUID;
+        return levelObject.GetCustomMaterialOverride().GUID;
+    }
+
+    public static void SetCustomMaterialOverride(
+        this LevelObject levelObject,
+        AssetReference<MaterialPaletteAsset> value)
+    {
+        CustomMaterialOverrideField.SetValue(levelObject, value);
     }
 
     public static int GetMaterialIndexOverride(this LevelObject levelObject)
     {
         return (int)MaterialIndexOverrideField.GetValue(levelObject);
+    }
+
+    public static void SetMaterialIndexOverride(this LevelObject levelObject, int value)
+    {
+        MaterialIndexOverrideField.SetValue(levelObject, value);
     }
 
     public static void ReapplyMaterialOverrides(this LevelObject levelObject)

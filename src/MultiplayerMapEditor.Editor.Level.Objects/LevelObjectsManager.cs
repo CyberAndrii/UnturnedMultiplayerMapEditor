@@ -199,6 +199,21 @@ internal sealed class LevelObjectsManager : ILevelObjectsManager
         UniTask.Post(() => EditorObjectsReflection.RemoveSelection(transform), PlayerLoopTiming.LastUpdate);
     }
 
+    public void UpdateObjectProperties(NetId netId, Guid materialOverride, int materialIndexOverride)
+    {
+        if (!TryFind(netId, out LevelObject? @object))
+        {
+            throw new ArgumentException("Level object was not found", nameof(netId))
+            {
+                Data = { ["NetId"] = netId.ToString() }
+            };
+        }
+
+        @object.SetCustomMaterialOverride(new AssetReference<MaterialPaletteAsset>(materialOverride));
+        @object.SetMaterialIndexOverride(materialIndexOverride);
+        @object.ReapplyMaterialOverrides();
+    }
+
     public bool TryFind(UnityEngine.Transform transform, [NotNullWhen(true)] out NetId? netId)
     {
         if (transform == null)
