@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.Editor.Terrain.Heightmap\MultiplayerMapEditor.Editor.Terrain.Heightmap.csproj" />
     <ProjectReference Include="..\MultiplayerMapEditor.Editor.Level.Objects\MultiplayerMapEditor.Editor.Level.Objects.csproj" />
     <ProjectReference Include="..\MultiplayerMapEditor.Editor\MultiplayerMapEditor.Editor.csproj" />
     <ProjectReference Include="..\MultiplayerMapEditor.IoC.Abstractions\MultiplayerMapEditor.IoC.Abstractions.csproj" />

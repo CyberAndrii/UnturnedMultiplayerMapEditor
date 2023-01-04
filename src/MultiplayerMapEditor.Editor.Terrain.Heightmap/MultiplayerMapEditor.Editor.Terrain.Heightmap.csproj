@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.5.0" />
+    <PackageReference Include="HarmonyX" Version="2.10.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="MultiplayerMapEditor.LiteNetLib.Redist" Version="0.9.5.2" />
+    <PackageReference Include="MultiplayerMapEditor.UniTask.Redist" Version="2.3.3" />
+    <PackageReference Include="MultiplayerMapEditor.Unturned.Redist" Version="3.22.20" />
+    <PackageReference Include="Nullable" Version="1.3.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MultiplayerMapEditor.Common\MultiplayerMapEditor.Common.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.IoC.Abstractions\MultiplayerMapEditor.IoC.Abstractions.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.Networking.Abstractions\MultiplayerMapEditor.Networking.Abstractions.csproj" />
+    <ProjectReference Include="..\MultiplayerMapEditor.Networking.System\MultiplayerMapEditor.Networking.System.csproj" />
+  </ItemGroup>
+
+
+</Project>

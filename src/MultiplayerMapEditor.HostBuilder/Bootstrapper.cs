@@ -9,6 +9,9 @@ using Serilog.Extensions.Logging;
 
 namespace MultiplayerMapEditor.HostBuilder;
 
+/// <summary>
+/// Starts/stop the application's host.
+/// </summary>
 public sealed class Bootstrapper : IBootstrapper, IAsyncDisposable
 {
     private readonly string _workingDirectory;
@@ -21,6 +24,9 @@ public sealed class Bootstrapper : IBootstrapper, IAsyncDisposable
         _mainThreadId = mainThreadId;
     }
 
+    /// <summary>
+    /// Gets <see cref="IServiceProvider"/> of current running host, or null when is not running.
+    /// </summary>
     public IServiceProvider? Services => _host?.Services;
 
     public async UniTask StartAsync(CancellationToken cancellationToken)
@@ -52,6 +58,7 @@ public sealed class Bootstrapper : IBootstrapper, IAsyncDisposable
                     typeof(MultiplayerMapEditor.IoC.HostContainerBuilder),
                     typeof(MultiplayerMapEditor.Editor.IoC.HostContainerBuilder),
                     typeof(MultiplayerMapEditor.Editor.Level.Objects.IoC.HostContainerBuilder),
+                    typeof(MultiplayerMapEditor.Editor.Terrain.Heightmap.IoC.HostContainerBuilder),
                     typeof(MultiplayerMapEditor.Networking.IoC.HostContainerBuilder),
                     typeof(MultiplayerMapEditor.Networking.System.IoC.HostContainerBuilder),
                     typeof(MultiplayerMapEditor.Networking.UnityEngine.IoC.HostContainerBuilder),

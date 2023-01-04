@@ -39,4 +39,34 @@ public static class NetDataWriterExtensions
         writer.Put(guidBuffer.Part1);
         writer.Put(guidBuffer.Part2);
     }
+
+    public static void PutDictionary<TKey, TValue>(
+        this NetDataWriter writer,
+        ICollection<KeyValuePair<TKey, TValue>> dict,
+        Action<NetDataWriter, TKey> keyWriterAction,
+        Action<NetDataWriter, TValue> valueWriterAction)
+    {
+        writer.PutDictionary(
+            dict,
+            (lengthWriter, value) => lengthWriter.Put(checked((ushort)value)),
+            keyWriterAction,
+            valueWriterAction
+        );
+    }
+
+    public static void PutDictionary<TKey, TValue>(
+        this NetDataWriter writer,
+        ICollection<KeyValuePair<TKey, TValue>> dict,
+        Action<NetDataWriter, int> lengthWriterAction,
+        Action<NetDataWriter, TKey> keyWriterAction,
+        Action<NetDataWriter, TValue> valueWriterAction)
+    {
+        lengthWriterAction(writer, dict.Count);
+
+        foreach (var kvp in dict)
+        {
+            keyWriterAction(writer, kvp.Key);
+            valueWriterAction(writer, kvp.Value);
+        }
+    }
 }

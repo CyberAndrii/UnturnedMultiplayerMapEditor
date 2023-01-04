@@ -23,4 +23,31 @@ public static class NetDataReaderExtensions
     {
         return new GuidBuffer(reader.GetULong(), reader.GetULong());
     }
+
+    public static Dictionary<TKey, TValue> GetDictionary<TKey, TValue>(
+        this NetDataReader reader,
+        Func<NetDataReader, TKey> keyReaderFunc,
+        Func<NetDataReader, TValue> valueReaderFunc)
+    {
+        return reader.GetDictionary(lengthReader => lengthReader.GetUShort(), keyReaderFunc, valueReaderFunc);
+    }
+
+    public static Dictionary<TKey, TValue> GetDictionary<TKey, TValue>(
+        this NetDataReader reader,
+        Func<NetDataReader, int> lengthReaderFunc,
+        Func<NetDataReader, TKey> keyReaderFunc,
+        Func<NetDataReader, TValue> valueReaderFunc)
+    {
+        var length = lengthReaderFunc(reader);
+        var dictionary = new Dictionary<TKey, TValue>(length);
+
+        for (var i = 0; i < length; i++)
+        {
+            var key = keyReaderFunc(reader);
+            var value = valueReaderFunc(reader);
+            dictionary[key] = value;
+        }
+
+        return dictionary;
+    }
 }
